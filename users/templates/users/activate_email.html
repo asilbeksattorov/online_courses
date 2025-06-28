@@ -1,0 +1,5 @@
+<p>Salom {{ user.username }},</p>
+<p>Siz akkaunt ochdingiz. Quyidagi havola orqali uni faollashtiring:</p>
+<a href="http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}">
+    Akkauntni faollashtirish
+</a>

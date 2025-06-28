@@ -1,0 +1,163 @@
+{% extends "course/base/base.html" %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<!-- Header Start -->
+<div class="container-fluid page-header" style="margin-bottom: 90px;">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+            <h3 class="display-4 text-white text-uppercase">About</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="/">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">About</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-5">
+                <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'course/img/about.jpg' %}" alt="">
+            </div>
+            <div class="col-lg-7">
+                <div class="text-left mb-4">
+                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">About Us</h5>
+                    <h1>Innovative Way To Learn</h1>
+                </div>
+                <p>
+                    🎓 <strong>Najot Ta'lim — the hub for modern professions.</strong><br>
+                    Here, we help youth and self-learners become competitive IT specialists.
+                    Practical learning programs, experienced mentors, and continuous support are our main strengths.
+                </p>
+
+                <a class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2" data-toggle="collapse" href="#moreAbout" role="button" aria-expanded="false" aria-controls="moreAbout">
+                    Learn More
+                </a>
+
+                <div class="collapse mt-3" id="moreAbout">
+                    <p><strong>Najot Ta'lim</strong> is an courseal center that offers practical and modern IT training in an easy-to-learn format.</p>
+                    <ul style="padding-left: 20px;">
+                        <li>💡 Experienced mentors</li>
+                        <li>🧠 Project-based learning</li>
+                        <li>🧑‍💻 Modern technologies</li>
+                        <li>🤝 Collaborative environment with continuous support</li>
+                    </ul>
+                    <p>
+                        Today, thousands of our students have already found their path in the IT field and achieved great success.
+                        🎯 If you also want to become a skilled professional — <strong>Najot Ta'lim</strong> is the right place for you!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- Registration Start -->
+<div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <div class="mb-4">
+                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Need Any Courses</h5>
+                    <h1 class="text-white">30% Discount for New Students!</h1>
+                </div>
+                <p class="text-white">
+                    Interested in the IT field? Learn modern professions with Najot Ta’lim!
+                    Practical experience, real projects, expert mentors, and hands-on training — all in one place.
+                    Now offering a special discount for new students!
+                </p>
+                <ul class="list-inline text-white m-0">
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>IT courses: Python, Web, Android, and more</li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Project-based learning and solid hands-on experience</li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Ongoing mentor support and guidance</li>
+                </ul>
+            </div>
+
+
+            <div class="col-lg-5">
+                <div class="card border-0">
+                    <div class="card-header bg-light text-center p-4">
+                        <h1 class="m-0">Sign Up Now</h1>
+                    </div>
+                    <div class="card-body rounded-bottom bg-primary p-5">
+                        <form>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 p-4" placeholder="Your email" required />
+                            </div>
+                             <div class="form-group">
+                                <input type="text" class="form-control border-0 p-4" placeholder="Username" required />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control border-0 p-4" placeholder="Pasword" required />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control border-0 p-4" placeholder="Confirm Password" required />
+                            </div>
+
+
+                            <div>
+                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Registration End -->
+
+
+<!-- Testimonial Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Testimonial</h5>
+            <h1>What Say Our Students</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="owl-carousel testimonial-carousel">
+                    {% for student in students %}
+                        <div class="text-center">
+                            <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
+                            <h4 class="font-weight-normal mb-4">
+                                {{ student.students_opinion }}
+                            </h4>
+                            <img class="img-fluid mx-auto mb-3 rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" src="{{ student.students_image.url }}" alt="{{ student.name }}">
+                            <h5 class="m-0">{{ student.name }}</h5>
+                            {% if student.course %}
+                                <span>{{ student.course.name }}</span>
+                            {% endif %}
+                        </div>
+                    {% empty %}
+                        <p class="text-center text-muted">No student opinions available yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonial End -->
+
+{% endblock %}

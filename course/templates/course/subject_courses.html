@@ -1,0 +1,35 @@
+{% extends 'course/base/base.html' %}
+
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subject</h5>
+        <h1>{{ subject.title }} Courses</h1>
+    </div>
+    <div class="row">
+        {% for course in courses %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="rounded overflow-hidden mb-2">
+                <img class="img-fluid" src="{{ course.image.url }}" alt="{{ course.title }}">
+                <div class="bg-secondary p-4">
+                    <div class="d-flex justify-content-between mb-3">
+                        <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>{{ course.student_count }} Students</small>
+                        <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>{{ course.duration }}</small>
+                    </div>
+                    <a class="h5" href="{% url 'course:course_detail' course.pk %}">{{ course.title }}</a>
+                    <div class="border-top mt-4 pt-4">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
+                            <h5 class="m-0">${{ course.price }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">Bu subject uchun hali kurslar yo‘q.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
