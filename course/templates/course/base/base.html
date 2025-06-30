@@ -32,7 +32,7 @@
 <div class="container-fluid d-none d-lg-block">
         <div class="row align-items-center py-4 px-xl-5">
             <div class="col-lg-3">
-                <a href="{% url 'course:home' %}" class="text-decoration-none">
+                <a href="{% url 'course:index' %}" class="text-decoration-none">
                     <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
                 </a>
             </div>
@@ -92,7 +92,7 @@
                     </a>
                     <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                         {% for subject in subjects %}
-                            <a href="{% url 'course:subject_courses' slug=subject.slug %}" class="dropdown-item">
+                            <a href="{% url 'course:subject_detail' slug=subject.slug %}" class="dropdown-item">
                                 {{ subject.title }}
                             </a>
 
@@ -113,7 +113,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="{% url 'course:home' %}" class="nav-item nav-link active">Home</a>
+                            <a href="{% url 'course:index' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'course:about' %}" class="nav-item nav-link">About</a>
                             <a href="{% url 'course:courses_list' %}" class="nav-item nav-link">Courses</a>
                             <a href="{% url 'course:teacher' %}" class="nav-item nav-link">Teachers</a>
@@ -154,12 +154,12 @@
                         <p><i class="fa fa-phone-alt mr-2"></i>+9989 93 880 07 09</p>
                         <p><i class="fa fa-envelope mr-2"></i>asilbeksattorov.2002@gmail.com</p>
                         <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-outline-light btn-square mr-2" href="https://t.me/vrkh13" target="_blank"><i class="fab fa-telegram"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2" href="https://github.com/oybek1100" target="_blank"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-outline-light btn-square" href="https://www.instagram.com/niroxp" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="https://t.me/Asilbek_S_02" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href="https://asilbeksattorov" target="_blank"><i class="fab fa-github"></i></a>
+                            <a class="btn btn-outline-light btn-square" href="https://www.instagram.com/asilbeksattorov_" target="_blank"><i class="fab fa-instagram"></i></a>
 
                         </div>
-                    </div>
+            </div>
                     <div class="col-md-6 mb-5">
                         <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Our Courses</h5>
                         <div class="d-flex flex-column justify-content-start">

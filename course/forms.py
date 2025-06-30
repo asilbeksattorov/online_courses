@@ -49,12 +49,11 @@ class FileForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['content', 'rating', 'parent']
+        fields = ['content', 'rating']
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 3, 'cols': 100}),
-            'rating': forms.RadioSelect,
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Izoh yozing...'}),
+            'rating': forms.Select(attrs={'class': 'form-control'}),
         }
-
 
 
 class RegistrationForm(UserCreationForm):

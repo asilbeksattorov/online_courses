@@ -33,7 +33,7 @@
             <div class="card-body">
                 {% for comment in comments %}
                     <div class="border p-3 mb-3">
-                        <p><strong>{{ comment.user_id }}</strong> - Rated:
+                        <p><strong>{{ comment.user_id.username }}</strong> - Rated:
                             {{ comment.rating }}/5</p>
                         <p>{{ comment.content }}</p>
 

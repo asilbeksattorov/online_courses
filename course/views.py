@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+from . import models
 from .models import Subject, Course, Module, Topic, Text, Video, Image, File, Comment
 from django.core.paginator import Paginator
 from django.contrib.contenttypes.models import ContentType
@@ -11,6 +13,7 @@ from django.contrib import messages
 from course.forms import VideoForm, CommentForm
 from .forms import RegistrationForm
 from django.views.generic.edit import FormView
+from django.db.models import Avg
 
 
 
@@ -45,7 +48,7 @@ class SubjectDetailView(View):
 
 class CoursesListView(ListView):
     model = Course
-    template_name = 'course/courses.html'
+    template_name = 'course/course.html'
     context_object_name = 'courses'
     paginate_by = 6
 
@@ -57,11 +60,9 @@ class CoursesListView(ListView):
         for course in context['courses']:
             course.student_count = course.modules.count()
             course.total_duration = course.duration
-            course.average_rating = round(Comment.objects.filter(video_id__in=course.modules.values_list('topics__object_id', flat=True)).aggregate(models.Avg('rating'))['rating__avg'] or 0, 1)
+            course.average_rating = round(Comment.objects.filter(video_id__in=course.modules.values_list('topics__object_id', flat=True)).aggregate(Avg('rating'))['rating__avg'] or 0, 1)
             course.comment_count = Comment.objects.filter(video_id__in=course.modules.values_list('topics__object_id', flat=True)).count()
         return context
-
-
 
 
 
@@ -82,7 +83,7 @@ class CourseCreateView(CreateView):
     model = Course
     fields = ['title', 'overview', 'duration', 'price', 'subject', 'image']
     template_name = 'course/course_form.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -94,14 +95,14 @@ class CourseUpdateView(UpdateView):
     model = Course
     fields = ['title', 'overview', 'duration', 'price', 'subject', 'image']
     template_name = 'course/course_form.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('index')
 
 
 @method_decorator(login_required, name='dispatch')
 class CourseDeleteView(DeleteView):
     model = Course
     template_name = 'course/course_confirm_delete.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('index')
 
 
 class ModuleDetailView(DetailView):
@@ -132,7 +133,7 @@ class ContentDetailView(View):
         }.get(model_name)
 
         if not model:
-            return redirect('home')
+            return redirect('index')
 
         content_object = get_object_or_404(model, pk=pk)
         return render(request, 'course/content_detail.html', {'item': content_object})
@@ -147,7 +148,7 @@ class AddNewVideoView(CreateView):
     model = Video
     form_class = VideoForm
     template_name = 'course/add-new-video.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         messages.success(self.request, "New video added successfully.")
@@ -159,7 +160,7 @@ class VideoUpdateView(UpdateView):
     model = Video
     form_class = VideoForm
     template_name = 'course/update.html'
-    success_url = reverse_lazy('home')  # update to correct redirect if needed
+    success_url = reverse_lazy('index')  # update to correct redirect if needed
 
     def form_valid(self, form):
         messages.success(self.request, "Video updated successfully.")
@@ -174,7 +175,7 @@ class VideoDeleteView(DeleteView):
     model = Video
     template_name = 'course/delete_confirm/delete-confirm-video.html'
     context_object_name = 'video'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('index')
 
     def delete(self, request, *args, **kwargs):
         messages.warning(self.request, "Video deleted.")
@@ -216,7 +217,7 @@ class VideoDetailView(DetailView):
 class RegisterView(FormView):
     template_name = 'course/about.html'
     form_class = RegistrationForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         form.save()
@@ -228,6 +229,7 @@ class RegisterView(FormView):
 class TeacherView(TemplateView):
     template_name = 'course/teacher.html'
     from django.views.generic import TemplateView
+
 
 class TeacherView(TemplateView):
     template_name = 'course/teacher.html'

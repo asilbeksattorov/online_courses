@@ -22,12 +22,12 @@ class CustomLoginView(LoginView):
     model = User
     template_name = 'users/login.html'
     fields = ('username', 'password')
-    success_url = reverse_lazy('education:index')
+    success_url = reverse_lazy('course:index')
 
 
 class CustomLogOutView(LogoutView):
-    template_name = 'education/index.html'
-    next_page = reverse_lazy('education:index')
+    template_name = 'course/index.html'
+    next_page = reverse_lazy('course:index')
 
     def dispatch(self, request, *args, **kwargs):
         messages.success(request, "Tizimdan muvaffaqiyatli chiqdingiz.")
@@ -37,7 +37,7 @@ class CustomLogOutView(LogoutView):
 class CustomRegisterView(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'users/register.html'
-    success_url = reverse_lazy('education:index')
+    success_url = reverse_lazy('course:index')
 
     def form_valid(self, form):
         user = form.save(commit=False)

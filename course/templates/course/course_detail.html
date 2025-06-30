@@ -22,7 +22,7 @@
             </ul>
 
             {% if user.is_authenticated %}
-                <a href="{% url 'course:course_view_detail' pk=course.pk %}" class="btn btn-success btn-lg">Kursni ko‘rish</a>
+                <a href="{% url 'course:course_detail' pk=course.pk %}" class="btn btn-success btn-lg">Kursni ko‘rish</a>
             {% else %}
                 <a href="{% url 'users:login' %}?next={{ request.path }}" class="btn btn-warning btn-lg">
                     Kursni ko‘rish uchun tizimga kiring
