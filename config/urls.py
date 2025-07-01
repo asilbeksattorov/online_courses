@@ -22,5 +22,6 @@ urlpatterns = [
     path('course/', include('course.urls', namespace='course')),
     path('users/', include('users.urls', namespace='users')),
     path('auth/', include('social_django.urls', namespace='social')),
-    path('api-auth/', include('rest_framework.urls'))
+    # path('api-auth/', include('rest_framework.urls'))
+    path('api/', include('course.api_urls')),
 ]
