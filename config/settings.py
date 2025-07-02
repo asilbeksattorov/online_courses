@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'social_django',
     'rest_framework',
+    # 'django.contrib.sites',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [

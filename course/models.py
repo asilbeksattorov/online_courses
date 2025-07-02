@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.conf import settings
-
+from django.db.models import Avg
 # Create your models here.
 
 
@@ -32,6 +32,15 @@ class Course(models.Model):
     image = models.ImageField(upload_to='course/images')
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='courses')
     created = models.DateTimeField(auto_now_add=True)
+
+
+    def average_rating(self):
+        return self.modules \
+            .values_list('topics__item__comments__rating', flat=True) \
+            .exclude(topics__item__comments__rating=None) \
+            .aggregate(avg_rating=Avg('topics__item__comments__rating'))['avg_rating'] or 0
+
+
 
     def __str__(self):
         return self.title
@@ -111,21 +120,6 @@ class Topic(models.Model):
     class Meta:
         ordering = ['my_order']
 
-
-
-
-
-# class Role(models.Model):
-#     name = models.CharField(max_length=200,unique=True)
-
-#     def __str__(self):
-#         return self.name
-
-
-# class CustomUser(AbstractUser):
-#     email = models.EmailField()
-#     phone_number = models.CharField()
-#     role = models.ForeignKey(Role,related_name='users',on_delete=models.CASCADE)
 
 
 
