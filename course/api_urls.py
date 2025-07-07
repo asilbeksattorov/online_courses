@@ -1,5 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from course.auth_views import RegisterView, LogoutView
+from rest_framework.authtoken.views import obtain_auth_token
+
 from .api_views import (
     SubjectListCreateAPIView,
     SubjectRetrieveUpdateDestroyAPIView,
@@ -21,4 +24,8 @@ urlpatterns = [
     path('courses/<int:pk>/', CoursePutOnlyView.as_view(), name='course_put_only'),
 
     path('', include(router.urls)),
+
+    path('token/login/', obtain_auth_token, name='api_token_login'),
+    path('token/register/', RegisterView.as_view(), name='api_token_register'),
+    path('token/logout/', LogoutView.as_view(), name='api_token_logout'),
 ]

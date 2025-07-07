@@ -7,6 +7,8 @@ from .permissions import CombinedCustomPermission
 from rest_framework.response import Response
 
 
+
+
 # SUBJECT CRUD
 class SubjectListCreateAPIView(generics.ListCreateAPIView):
     queryset = Subject.objects.all()
@@ -75,3 +77,8 @@ class CoursePutOnlyView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+

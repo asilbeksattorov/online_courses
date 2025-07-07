@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'social_django',
     'rest_framework',
+    'rest_framework.authtoken',
     # 'django.contrib.sites',
     # 'allauth',
     # 'allauth.account',
@@ -157,3 +158,11 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
